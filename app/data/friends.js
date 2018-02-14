@@ -21,6 +21,23 @@ var friendsArray = [
     "5",
     "5"    
     ]
+  },
+
+    {
+    name: "George",
+    photo: "https://vignette.wikia.nocookie.net/disney/images/c/ca/Snow_white_transparent.png/revision/latest?cb=20151111070659",
+    scores: [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"    
+    ]
   }
 ];
 

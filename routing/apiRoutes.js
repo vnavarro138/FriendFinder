@@ -31,17 +31,40 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.post("/api/friends", function(req, res) {
+    var currentFriend = req.body;
+    var currentScore = currentFriend["scores[]"];
+    var match = {name:"",photo:"",difference:Infinity};
+    console.log(currentScore);
     // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body-parser middleware
-    if (friendsData.length < 5) {
-      friendsData.push(req.body);
-      res.json(true);
-    }
-    else {
-      console.log("no action");
-    }
+
+    var differenceScores;
+    for (var i=0; i<friendsData.length; i++){
+   var friendsInfo = friendsData[i];
+   differenceScores = 0;
+//loop through all scores (total of 10 questions)
+   for (var j=0; j<9; j++){
+  var friendsScores = parseInt(friendsInfo.scores[j]);
+  var currentUserScore = parseInt(currentScore[j]);
+  differenceScores += Math.abs(friendsScores - currentUserScore);
+   console.log(differenceScores);
+   }
+
+   if (differenceScores<match.difference){
+      match.name = friendsInfo.name;
+      match.photo = friendsInfo.photo;
+      match.difference = differenceScores;
+ }
+
+}
+    res.json (match)
+    
   });
+
+//take current friend who just submitted score compare their score to all friends in friends array
+
+//take the smallest difference and match them to that friend
 
   // ---------------------------------------------------------------------------
   // I added this below code so you could clear out the table while working with the functionality.
